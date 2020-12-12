@@ -1,0 +1,78 @@
+<center><h1>Envoyer un mail à des adresses mails</h1></center>
+
+<div id="main">
+		<h3>Adresses Mails liste séparé par des ";": </h3>
+		<input type="text" id="mail_l"><br>
+		<h3>Sujet : </h3>
+		<input type="text" id="sbj"><br>
+		<h3>Message :  </h3>
+		<input type="text" id="message"><br>
+		<input  type="submit" onclick="refresh()">
+</div>
+
+
+<div id="hts"></div>
+
+
+
+<h3>Les mail seront envoyer de la part de jorkey.pp@gmail.com</h3>
+<script type="text/javascript">
+	function rel() {
+		document.getElementById('main').innerHTML="En cours d'envoie ... <img src='https://zupimages.net/up/20/34/15n7.gif'>"
+	}
+
+
+
+
+var getHttpRequest=function() {
+    if (window.XMLHttpRequest) { 
+      httpRequest = new XMLHttpRequest();
+      if (httpRequest.overrideMimeType) {
+        httpRequest.overrideMimeType('text/xml');
+      }
+    }
+    else if (window.ActiveXObject) { 
+      try {
+        httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+      }
+      catch (e) {
+        try {
+          httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        catch (e) {}
+      }
+    }
+
+    if (!httpRequest) {
+      alert('Xtp.. erreur');
+      return false;
+    }
+
+    return httpRequest
+}
+function refresh() {
+	var k=document.getElementById("mail_l").value.replace("/", " ");
+	var h=document.getElementById("sbj").value.replace("/", " ");
+	var l=document.getElementById("message").value.replace("/", " ");
+
+	if (k=="" || h=="" || l=="") {
+		return
+	}
+
+	var httpRequest=getHttpRequest()
+	var err=""
+	var t=k.split(";")
+	if (t.length>15){
+		var err="Envoie à 15 email à la fois. Mails ignorés "+t.slice(15, t.length)
+	}
+
+	document.getElementById('hts').innerHTML="<h1>Envoie en cours ... <br>Vous pouvez quitter la page.</h1><br><img src='https://zupimages.net/up/20/34/15n7.gif'><br>"+err
+
+	v=httpRequest.open('GET','http://localhost:5000/send.ppv4.http+3+$$/'+k+'/'+h+'/'+l , true)
+  	httpRequest.onreadystatechange=function() {
+   	document.getElementById('hts').innerHTML=httpRequest.responseText
+   	}
+	httpRequest.send()
+
+}
+</script>
