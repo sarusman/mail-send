@@ -1,2 +1,3 @@
 # mymail
-http://mymail.pythonanywhere.com
+Envoie des mails a des adresses mails
+Lien : http://mymail.pythonanywhere.com
