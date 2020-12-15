@@ -32,7 +32,7 @@ def send(mails, sbj, msg):
 	conex=smtplib.SMTP('smtp.gmail.com:587')
 	conex.starttls()
 	err_l=[]
-	conex.login('paulavoine53@gmail.com', 'rajah1971')
+	conex.login('paulavoine53@gmail.com', '*')
 	message=('Subject: {}\n\n{}'.format(sbj+'\n', msg))
 	for i in mails:
 		if "@" not in i and "." not in i:
