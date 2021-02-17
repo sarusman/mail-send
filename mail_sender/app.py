@@ -3,7 +3,7 @@ import smtplib, unidecode
 from datetime import timedelta
 
 app=Flask(__name__)
-app.secret_key="3208932"
+app.secret_key="jemenbatlescouille"
 
 
 @app.route('/')
